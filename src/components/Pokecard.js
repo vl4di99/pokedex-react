@@ -10,10 +10,15 @@ class Pokecard extends Component {
     this.state = { modalOpen: false };
   }
 
+  openModal = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modalOpen: false });
+  };
+
   render() {
-    const cardInfo = (howisit) => {
-      this.setState({ modalOpen: howisit });
-    };
     //let imgSrc_PNG = `${POKE_IMAGE}${this.props.number}.png`;
     let imgSrc = `${POKE_IMAGE}${this.props.number}.svg`;
     return (
@@ -26,14 +31,14 @@ class Pokecard extends Component {
             src={imgSrc}
             alt={this.props.name}
             className="Pokecard__image"
-            onClick={this.cardInfo(true)}
+            onClick={this.openModal}
           />
           <div className="Pokecard__data">
             <div className="Pokecard__data__infobutton">Get Info</div>
           </div>
         </div>
         {this.state.modalOpen && (
-          <CardInfoModal url={this.props.url} open={cardInfo} />
+          <CardInfoModal url={this.props.url} modalClose={this.closeModal} />
         )}
       </div>
     );
